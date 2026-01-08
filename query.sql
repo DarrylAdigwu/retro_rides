@@ -218,3 +218,21 @@
 -- DELETE FROM cars WHERE condition = 0;
 
 -- DELETE FROM cars WHERE sold IS TRUE;
+
+
+          -- JOINING TABLES --
+-- SELECT brand, model, price, sold, sold_price
+--   FROM sold_cars SC
+--   LEFT JOIN cars C ON SC.cars_id = C.id;
+
+-- SELECT brand, model, price, sold, sold_price
+--   FROM sold_cars SC
+--   RIGHT JOIN cars C ON SC.cars_id = C.id;
+
+-- SELECT name, role, city, state
+--   FROM staff S
+--   RIGHT JOIN dealerships D ON S.dealership_id = D.id;
+
+SELECT name, role, city, state
+  FROM staff S
+  FULL JOIN dealerships D ON s.dealership_id = D.id;
