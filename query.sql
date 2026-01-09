@@ -233,6 +233,58 @@
 --   FROM staff S
 --   RIGHT JOIN dealerships D ON S.dealership_id = D.id;
 
-SELECT name, role, city, state
-  FROM staff S
-  FULL JOIN dealerships D ON s.dealership_id = D.id;
+-- SELECT name, role, city, state
+--   FROM staff S
+--   FULL JOIN dealerships D ON s.dealership_id = D.id;
+
+-- SELECT name, role, city, state
+--   FROM staff S
+--   INNER JOIN dealerships D ON s.dealership_id = D.id;
+
+-- SELECT name, role, sold_price 
+--   FROM staff S 
+--   INNER JOIN sold_cars SC ON S.id = SC.seller;
+
+-- SELECT name, role, sold_price 
+--   FROM staff S 
+--   FULL JOIN sold_cars SC ON S.id = SC.seller;
+
+          -- JOIN AND AGGREGATES CHALLENGE --
+-- SELECT city, state, ROUND(AVG(C.price), 2)
+--   FROM cars C
+--   LEFT JOIN dealerships D ON D.id = dealership_id
+--   GROUP BY city, state;
+
+-- SELECT name, role, SUM(sold_price) AS total_sales
+--   FROM staff S 
+--   LEFT JOIN sold_cars SC ON SC.seller = S.id
+--   WHERE role = 'Salesperson'
+--   GROUP BY name, role
+--   ORDER BY total_sales DESC;
+
+-- SELECT city, state, COUNT(C.id) AS car_count
+--   FROM cars C
+--   RIGHT JOIN dealerships D ON D.id = dealership_id
+--   WHERE sold IS NOT TRUE
+--   GROUP BY city, state
+--   ORDER BY car_count;
+
+--  SELECT 
+--   name, 
+--   role,
+--   D.city
+--   FROM sold_cars SC
+--   FULL JOIN staff S ON SC.seller = S.id
+--   LEFT JOIN dealerships D ON dealership_id = D.id
+--   WHERE SC.id IS NULL
+--   AND role = 'Salesperson';
+
+SELECT 
+city,
+state,
+COUNT(SC.id) AS cars_sold
+FROM sold_cars SC
+LEFT JOIN cars C ON SC.cars_id = C.id
+RIGHT JOIN dealerships D ON dealership_id = D.id
+GROUP BY city, state
+ORDER BY cars_sold DESC;

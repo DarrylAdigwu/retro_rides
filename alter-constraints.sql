@@ -17,3 +17,13 @@ INSERT INTO dealerships ( city, state, established )
 	( 'Dallas', 'TX', '2027-07-04' ),
 	( 'Austin', 'TX', '2027-07-04' ),
 	( 'Boston', 'MA', '2027-07-04');
+
+ALTER TABLE sold_cars
+  ALTER COLUMN seller DROP NOT NULL;
+
+UPDATE sold_cars
+  SET seller = NULL
+  WHERE seller = 5;
+
+DELETE FROM staff
+  WHERE id = 5;
